@@ -61,6 +61,10 @@ curl --location --request POST 'localhost/api/v1/members' \
 
 ### Melihat daftar anggota di PostgreSQL
 
+<pre>
+curl --location --request GET 'localhost/api/v1/members'
+</pre>
+
 ### Melakukan transaksi dengan menyimpan ke PostgreSQL
 
 ### Melihat history transaksi antara satu tanggal ke tanggal lain

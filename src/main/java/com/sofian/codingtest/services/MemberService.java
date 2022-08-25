@@ -12,11 +12,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.time.*;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MemberService implements IMemberService {
@@ -29,7 +32,6 @@ public class MemberService implements IMemberService {
 
     @SneakyThrows
     @Override
-    @Transactional
     public CreateMemberResponseDTO createNewMember(CreateMemberResquestDTO resquestDTO) {
         isValidDob(resquestDTO.getDob());
         // TODO cek nik
@@ -51,6 +53,17 @@ public class MemberService implements IMemberService {
         Member createdMember = memberRepository.save(member);
 
         return convertToDto(createdMember);
+    }
+
+    @Override
+    public List<CreateMemberResponseDTO> getAllMembers() {
+        List<Member> members = memberRepository.findAll();
+        if (!members.isEmpty()) {
+            return members.stream()
+                    .map(member -> modelMapper.map(member, CreateMemberResponseDTO.class))
+                    .collect(Collectors.toList());
+        }
+        return Collections.emptyList();
     }
 
     private void isValidDob(Date date) {
