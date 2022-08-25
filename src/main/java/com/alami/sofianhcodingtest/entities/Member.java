@@ -19,6 +19,9 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
+    @Column(unique = true, nullable = false)
+    private String nik;
+
     private String name;
 
     private String address;
