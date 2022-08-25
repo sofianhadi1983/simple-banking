@@ -24,7 +24,7 @@ Kelompok tsb mempunyai 3 anggota
 
 ## Struktur Tabel
 
-Bisa dilihat di sini agar lebih jelas : ![ERD](https://dbdiagram.io/d/6306f8a1f1a9b01b0fdbf2f2)
+Bisa dilihat di sini agar lebih jelas : https://dbdiagram.io/d/6306f8a1f1a9b01b0fdbf2f2
 
 ## HTTP Request Sample
 
