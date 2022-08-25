@@ -1,4 +1,4 @@
-package com.alami.sofianhcodingtest.dtos;
+package com.sofian.codingtest.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;

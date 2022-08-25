@@ -1,6 +1,6 @@
-package com.alami.sofianhcodingtest.repositories;
+package com.sofian.codingtest.repositories;
 
-import com.alami.sofianhcodingtest.entities.Member;
+import com.sofian.codingtest.entities.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

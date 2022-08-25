@@ -1,8 +1,8 @@
-package com.alami.sofianhcodingtest.controllers;
+package com.sofian.codingtest.controllers;
 
-import com.alami.sofianhcodingtest.dtos.CreateMemberResponseDTO;
-import com.alami.sofianhcodingtest.dtos.CreateMemberResquestDTO;
-import com.alami.sofianhcodingtest.services.IMemberService;
+import com.sofian.codingtest.dtos.CreateMemberResponseDTO;
+import com.sofian.codingtest.dtos.CreateMemberResquestDTO;
+import com.sofian.codingtest.services.IMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +18,8 @@ public class MemberController {
 
     @PostMapping("/api/v1/members")
     public ResponseEntity<CreateMemberResponseDTO> createNewMember(@RequestBody CreateMemberResquestDTO request) {
-        // TODO validate dob - isInFuture
+        // TODO when member created, the account data also created, empty load data created as well
         CreateMemberResponseDTO response = memberService.createNewMember(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
-    // TODO implement endpoint with response entity construct
-    // TODO implement controller advice in case validation failed
 }

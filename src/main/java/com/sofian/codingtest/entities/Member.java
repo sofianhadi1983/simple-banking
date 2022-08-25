@@ -1,4 +1,4 @@
-package com.alami.sofianhcodingtest.entities;
+package com.sofian.codingtest.entities;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +28,9 @@ public class Member {
 
     @Temporal(TemporalType.DATE)
     private Date dob;
+
+    @OneToOne(mappedBy = "accountOwner", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    private Account account;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)

@@ -1,4 +1,4 @@
-package com.alami.sofianhcodingtest.entities;
+package com.sofian.codingtest.entities;
 
 import lombok.Getter;
 import lombok.Setter;

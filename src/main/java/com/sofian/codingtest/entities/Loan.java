@@ -1,4 +1,4 @@
-package com.alami.sofianhcodingtest.entities;
+package com.sofian.codingtest.entities;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,36 +8,27 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-@Entity(name = "Account")
-@Table(name = "accounts")
+@Entity(name = "Loan")
+@Table(name = "loans")
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-public class Account {
+public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long accountId;
+    private Long loanId;
 
-    private BigDecimal totalDebit;
+    private BigDecimal loanPayable;
 
-    private BigDecimal totalCredit;
+    private BigDecimal loanPayment;
 
-    private BigDecimal endBalance;
+    private BigDecimal loanRemaining;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    private Member accountOwner;
-
-    @OneToMany(
-            mappedBy = "account",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<Transaction> transactions = new ArrayList<>();
+    @JoinColumn(name = "loan_owner")
+    private Account loanOwner;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
