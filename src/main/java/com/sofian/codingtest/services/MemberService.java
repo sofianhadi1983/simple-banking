@@ -8,14 +8,13 @@ import com.sofian.codingtest.entities.Member;
 import com.sofian.codingtest.exceptions.ValidationErrorException;
 import com.sofian.codingtest.repositories.MemberRepository;
 import lombok.SneakyThrows;
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
 import java.time.*;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -33,8 +32,7 @@ public class MemberService implements IMemberService {
     @SneakyThrows
     @Override
     public CreateMemberResponseDTO createNewMember(CreateMemberResquestDTO resquestDTO) {
-        isValidDob(resquestDTO.getDob());
-        // TODO cek nik
+        validate(resquestDTO);
 
         Loan loanRecord = new Loan();
         loanRecord.setLoanPayable(BigDecimal.ZERO);
@@ -75,11 +73,31 @@ public class MemberService implements IMemberService {
         }
     }
 
-    private Member convertToEntity(CreateMemberResquestDTO resquestDTO) throws ParseException {
+    private void validate(CreateMemberResquestDTO resquestDTO) {
+        if (resquestDTO == null) {
+            throw new ValidationErrorException("Body request cannot be empty");
+        }
+
+        if (StringUtils.isEmpty(resquestDTO.getNik())) {
+            throw new ValidationErrorException("nik cannot be empty");
+        }
+
+        if (StringUtils.isEmpty(resquestDTO.getName())) {
+            throw new ValidationErrorException("name cannot be empty");
+        }
+
+        if (StringUtils.isEmpty(resquestDTO.getAddress())) {
+            throw new ValidationErrorException("address cannot be empty");
+        }
+
+        isValidDob(resquestDTO.getDob());
+    }
+
+    private Member convertToEntity(CreateMemberResquestDTO resquestDTO) {
          return modelMapper.map(resquestDTO, Member.class);
     }
 
-    private CreateMemberResponseDTO convertToDto(Member member) throws ParseException {
+    private CreateMemberResponseDTO convertToDto(Member member) {
         return modelMapper.map(member, CreateMemberResponseDTO.class);
     }
 }
