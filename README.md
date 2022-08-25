@@ -25,3 +25,44 @@ Kelompok tsb mempunyai 3 anggota
 ## Struktur Tabel
 
 ![ERD](https://github.com/sofianhadi1983/simple-banking/blob/master/DB.png?raw=true)
+
+## HTTP Request Sample
+
+### Menambah anggota di PostgreSQL
+
+<pre>
+curl --location --request POST 'localhost/api/v1/members' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Wawan Setiawan",
+    "address": "Kompleks Asia Serasi No 100",
+    "nik": "33030509087610011",
+    "dob": "1990-01-10"
+}'
+
+curl --location --request POST 'localhost/api/v1/members' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Teguh Sudibyantoro",
+    "address": "Jalan Pemekaran No. 99",
+    "nik": "33030509087611111",
+    "dob": "1991-02-10"
+}'
+
+curl --location --request POST 'localhost/api/v1/members' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Joko Widodo",
+    "address": "Dusun Pisang Rt 10 Rw 20",
+    "nik": "33030509087611112",
+    "dob": "1992-03-10"
+}'
+</pre>
+
+### Melihat daftar anggota di PostgreSQL
+
+### Melakukan transaksi dengan menyimpan ke PostgreSQL
+
+### Melihat history transaksi antara satu tanggal ke tanggal lain
+
+### Melihat transaksi satu anggota
