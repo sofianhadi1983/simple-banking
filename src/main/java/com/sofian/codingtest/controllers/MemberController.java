@@ -18,8 +18,11 @@ public class MemberController {
 
     @PostMapping("/api/v1/members")
     public ResponseEntity<CreateMemberResponseDTO> createNewMember(@RequestBody CreateMemberResquestDTO request) {
-        // TODO when member created, the account data also created, empty load data created as well
         CreateMemberResponseDTO response = memberService.createNewMember(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+    // TODO - create get all member
+    
+
 }

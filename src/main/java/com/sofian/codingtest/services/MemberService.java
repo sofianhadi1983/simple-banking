@@ -32,6 +32,7 @@ public class MemberService implements IMemberService {
     @Transactional
     public CreateMemberResponseDTO createNewMember(CreateMemberResquestDTO resquestDTO) {
         isValidDob(resquestDTO.getDob());
+        // TODO cek nik
 
         Loan loanRecord = new Loan();
         loanRecord.setLoanPayable(BigDecimal.ZERO);
