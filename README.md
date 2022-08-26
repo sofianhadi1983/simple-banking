@@ -80,3 +80,6 @@ curl --location --request POST 'localhost/api/v1/members/1/transactions' \
 ### Melihat history transaksi antara satu tanggal ke tanggal lain
 
 ### Melihat transaksi satu anggota
+<pre>
+curl --location --request GET 'localhost/api/v1/members/1/transactions'
+</pre>

@@ -36,9 +36,16 @@ public class MemberController {
     }
 
     @PostMapping("/members/{memberId}/transactions")
-    public ResponseEntity<Object> createNewTransaction(@PathVariable("memberId") Long memberId,
+    public ResponseEntity<TransactionLogDTO> createNewTransaction(@PathVariable("memberId") Long memberId,
                                                        @RequestBody CreateTransactionRequestDTO request) {
         TransactionLogDTO response = transactionService.createNewTransaction(memberId, request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+    @GetMapping("/members/{memberId}/transactions")
+    public ResponseEntity<List<TransactionLogDTO>> getTransactionByMember(@PathVariable("memberId") Long memberId) {
+        List<TransactionLogDTO> responses = transactionService.getTransactionByMember(memberId);
+        return new ResponseEntity<>(responses, HttpStatus.OK);
+    }
+
 }

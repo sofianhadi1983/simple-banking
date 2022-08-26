@@ -17,7 +17,10 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -60,6 +63,25 @@ public class TransactionService implements ITransactionService {
         }
 
         return modelMapper.map(createdTransaction, TransactionLogDTO.class);
+    }
+
+    @Override
+    public List<TransactionLogDTO> getTransactionByMember(Long memberId) {
+        Optional<Member> memberOptional = memberRepository.findById(memberId);
+        if (!memberOptional.isPresent())
+            throw new ResourceNotFoundException("Member not found. Please check your corresponding member Id!");
+        Member member = memberOptional.get();
+        Account account = member.getAccount();
+
+        List<Transaction> transactions = transactionRepository.findAllByAccountAccountIdOrderByTransactionDateAsc(
+                account.getAccountId());
+        if (!transactions.isEmpty()) {
+            return transactions.stream()
+                    .map(transaction -> modelMapper.map(transaction, TransactionLogDTO.class))
+                    .collect(Collectors.toList());
+        }
+
+        return Collections.emptyList();
     }
 
     private Transaction createTransactionJournal(CreateTransactionRequestDTO requestDTO, Account account) {
