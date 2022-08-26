@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -75,6 +76,19 @@ public class TransactionService implements ITransactionService {
 
         List<Transaction> transactions = transactionRepository.findAllByAccountAccountIdOrderByTransactionDateAsc(
                 account.getAccountId());
+        if (!transactions.isEmpty()) {
+            return transactions.stream()
+                    .map(transaction -> modelMapper.map(transaction, TransactionLogDTO.class))
+                    .collect(Collectors.toList());
+        }
+
+        return Collections.emptyList();
+    }
+
+    @Override
+    public List<TransactionLogDTO> getTransactionsByPeriod(Date start, Date end) {
+        List<Transaction> transactions = transactionRepository.findAllByTransactionDateBetweenOrderByTransactionDateAsc(
+                start, end);
         if (!transactions.isEmpty()) {
             return transactions.stream()
                     .map(transaction -> modelMapper.map(transaction, TransactionLogDTO.class))

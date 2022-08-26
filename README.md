@@ -78,6 +78,9 @@ curl --location --request POST 'localhost/api/v1/members/1/transactions' \
 </pre>
 
 ### Melihat history transaksi antara satu tanggal ke tanggal lain
+<pre>
+curl --location --request GET 'localhost/api/v1/transactions?start=25-08-2022&end=26-08-2022'
+</pre>
 
 ### Melihat transaksi satu anggota
 <pre>

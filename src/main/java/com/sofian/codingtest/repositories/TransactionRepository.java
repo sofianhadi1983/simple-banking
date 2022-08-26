@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -25,4 +26,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     BigDecimal calculateLoanPayableByAccount(@Param("account") Account account);
 
     List<Transaction> findAllByAccountAccountIdOrderByTransactionDateAsc(Long memberId);
+
+    List<Transaction> findAllByTransactionDateBetweenOrderByTransactionDateAsc(Date start, Date end);
 }
