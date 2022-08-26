@@ -22,7 +22,6 @@ public class Transaction {
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    @CreatedDate
     private Date transactionDate;
 
     private BigDecimal transactionDebit;
@@ -31,7 +30,7 @@ public class Transaction {
 
     private BigDecimal transactionBalance;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
 
     @ManyToOne(fetch = FetchType.LAZY)

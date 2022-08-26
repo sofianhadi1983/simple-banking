@@ -65,7 +65,17 @@ curl --location --request POST 'localhost/api/v1/members' \
 curl --location --request GET 'localhost/api/v1/members'
 </pre>
 
-### Melakukan transaksi dengan menyimpan ke PostgreSQL
+### Melakukan transaksi dengan menyimpan ke PostgreSQL (SAVING, WITHDRAWAL, LOAN, LOAN_PAYMENT)
+
+<pre>
+curl --location --request POST 'localhost/api/v1/members/1/transactions' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "transaction_amount": 100000,
+    "transaction_type": "SAVING",
+    "transaction_date": "2022-08-26"
+}'
+</pre>
 
 ### Melihat history transaksi antara satu tanggal ke tanggal lain
 

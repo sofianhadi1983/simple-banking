@@ -1,5 +1,6 @@
 package com.sofian.codingtest.controllers;
 
+import com.sofian.codingtest.exceptions.ResourceNotFoundException;
 import com.sofian.codingtest.exceptions.ValidationErrorException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,17 @@ public class RestControllerAdvice extends ResponseEntityExceptionHandler {
         );
 
         return handleExceptionInternal(ex, errorDetails, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<?> resourceNotFoundErrorExceptionHandler(Exception ex, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false)
+        );
+
+        return handleExceptionInternal(ex, errorDetails, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
 }

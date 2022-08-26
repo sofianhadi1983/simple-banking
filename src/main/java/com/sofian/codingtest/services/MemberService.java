@@ -6,6 +6,8 @@ import com.sofian.codingtest.entities.Account;
 import com.sofian.codingtest.entities.Loan;
 import com.sofian.codingtest.entities.Member;
 import com.sofian.codingtest.exceptions.ValidationErrorException;
+import com.sofian.codingtest.repositories.AccountRepository;
+import com.sofian.codingtest.repositories.LoanRepository;
 import com.sofian.codingtest.repositories.MemberRepository;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
@@ -13,6 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.*;
 import java.util.Collections;
@@ -27,12 +30,21 @@ public class MemberService implements IMemberService {
     MemberRepository memberRepository;
 
     @Autowired
+    AccountRepository accountRepository;
+
+    @Autowired
+    LoanRepository loanRepository;
+
+    @Autowired
     ModelMapper modelMapper;
 
     @SneakyThrows
     @Override
+    @Transactional
     public CreateMemberResponseDTO createNewMember(CreateMemberResquestDTO resquestDTO) {
         validate(resquestDTO);
+
+        Member member = convertToEntity(resquestDTO);
 
         Loan loanRecord = new Loan();
         loanRecord.setLoanPayable(BigDecimal.ZERO);
@@ -43,13 +55,13 @@ public class MemberService implements IMemberService {
         account.setTotalDebit(BigDecimal.ZERO);
         account.setTotalCredit(BigDecimal.ZERO);
         account.setEndBalance(BigDecimal.ZERO);
-        account.setLoan(loanRecord);
 
-        Member member = convertToEntity(resquestDTO);
+        loanRecord.setLoanOwner(account);
+        account.setLoan(loanRecord);
         member.setAccount(account);
+        account.setAccountOwner(member);
 
         Member createdMember = memberRepository.save(member);
-
         return convertToDto(createdMember);
     }
 
