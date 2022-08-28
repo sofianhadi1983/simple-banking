@@ -5,6 +5,7 @@ import com.sofian.codingtest.dtos.CreateMemberResquestDTO;
 import com.sofian.codingtest.entities.Account;
 import com.sofian.codingtest.entities.Loan;
 import com.sofian.codingtest.entities.Member;
+import com.sofian.codingtest.exceptions.DataAlreadyExistException;
 import com.sofian.codingtest.exceptions.ValidationErrorException;
 import com.sofian.codingtest.repositories.AccountRepository;
 import com.sofian.codingtest.repositories.LoanRepository;
@@ -21,6 +22,7 @@ import java.time.*;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -61,6 +63,10 @@ public class MemberService implements IMemberService {
         member.setAccount(account);
         account.setAccountOwner(member);
 
+        Optional<Member> memberOptional = memberRepository.findByNik(resquestDTO.getNik());
+        if (memberOptional.isPresent()) {
+            throw new DataAlreadyExistException("Data with Key (nik)=("+resquestDTO.getNik()+") already exists.");
+        }
         Member createdMember = memberRepository.save(member);
         return convertToDto(createdMember);
     }

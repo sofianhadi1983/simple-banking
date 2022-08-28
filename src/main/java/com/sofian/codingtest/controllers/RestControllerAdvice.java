@@ -1,5 +1,6 @@
 package com.sofian.codingtest.controllers;
 
+import com.sofian.codingtest.exceptions.DataAlreadyExistException;
 import com.sofian.codingtest.exceptions.ResourceNotFoundException;
 import com.sofian.codingtest.exceptions.ValidationErrorException;
 import org.springframework.http.HttpHeaders;
@@ -60,5 +61,16 @@ public class RestControllerAdvice extends ResponseEntityExceptionHandler {
         );
 
         return handleExceptionInternal(ex, errorDetails, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
+    @ExceptionHandler(DataAlreadyExistException.class)
+    public ResponseEntity<?> dataAlreadyExistsErrorExceptionHandler(Exception ex, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false)
+        );
+
+        return handleExceptionInternal(ex, errorDetails, new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 }
