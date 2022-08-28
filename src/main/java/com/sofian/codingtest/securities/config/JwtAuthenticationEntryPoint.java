@@ -1,4 +1,4 @@
-package com.sofian.codingtest.securities;
+package com.sofian.codingtest.securities.config;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
