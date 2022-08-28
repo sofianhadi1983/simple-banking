@@ -1,4 +1,4 @@
-package com.sofian.codingtest.dtos;
+package com.sofian.codingtest.securities.dtos;
 
 import lombok.Getter;
 import lombok.Setter;

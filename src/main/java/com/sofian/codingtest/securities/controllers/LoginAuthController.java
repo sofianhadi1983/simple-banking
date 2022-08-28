@@ -1,9 +1,9 @@
-package com.sofian.codingtest.controllers;
+package com.sofian.codingtest.securities.controllers;
 
-import com.sofian.codingtest.dtos.ApiResponse;
-import com.sofian.codingtest.dtos.JwtAuthenticationResponse;
-import com.sofian.codingtest.dtos.LoginRequestDTO;
-import com.sofian.codingtest.dtos.SignupRequestDTO;
+import com.sofian.codingtest.securities.dtos.ApiResponse;
+import com.sofian.codingtest.securities.dtos.JwtAuthenticationResponse;
+import com.sofian.codingtest.securities.dtos.LoginRequestDTO;
+import com.sofian.codingtest.securities.dtos.SignupRequestDTO;
 import com.sofian.codingtest.exceptions.ValidationErrorException;
 import com.sofian.codingtest.securities.config.JwtTokenProvider;
 import com.sofian.codingtest.securities.entity.Role;
