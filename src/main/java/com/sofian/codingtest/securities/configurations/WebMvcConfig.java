@@ -1,4 +1,4 @@
-package com.sofian.codingtest.securities.config;
+package com.sofian.codingtest.securities.configurations;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

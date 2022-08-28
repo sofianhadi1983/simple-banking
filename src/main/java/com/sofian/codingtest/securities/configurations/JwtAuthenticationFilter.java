@@ -1,4 +1,4 @@
-package com.sofian.codingtest.securities.config;
+package com.sofian.codingtest.securities.configurations;
 
 import com.sofian.codingtest.securities.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;

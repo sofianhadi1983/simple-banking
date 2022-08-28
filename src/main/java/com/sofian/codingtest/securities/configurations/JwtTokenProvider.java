@@ -1,4 +1,4 @@
-package com.sofian.codingtest.securities.config;
+package com.sofian.codingtest.securities.configurations;
 
 import com.sofian.codingtest.securities.services.UserPrincipal;
 import io.jsonwebtoken.*;

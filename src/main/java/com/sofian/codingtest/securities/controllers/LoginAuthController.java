@@ -5,7 +5,7 @@ import com.sofian.codingtest.securities.dtos.JwtAuthenticationResponse;
 import com.sofian.codingtest.securities.dtos.LoginRequestDTO;
 import com.sofian.codingtest.securities.dtos.SignupRequestDTO;
 import com.sofian.codingtest.exceptions.ValidationErrorException;
-import com.sofian.codingtest.securities.config.JwtTokenProvider;
+import com.sofian.codingtest.securities.configurations.JwtTokenProvider;
 import com.sofian.codingtest.securities.entity.Role;
 import com.sofian.codingtest.securities.entity.RoleName;
 import com.sofian.codingtest.securities.entity.User;
