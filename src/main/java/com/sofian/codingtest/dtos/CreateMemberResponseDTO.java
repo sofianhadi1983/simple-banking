@@ -22,7 +22,7 @@ public class CreateMemberResponseDTO implements Serializable {
 
     private String address;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Jakarta")
     private Date dob;
 
     @JsonIgnore
