@@ -62,7 +62,7 @@ public class TransactionService implements ITransactionService {
                 TransactionType.LOAN_PAYMENT.equals(requestDTO.getTransactionType())) {
             createLoanSummary(account);
         }
-
+        TransactionLogDTO dto = modelMapper.map(createdTransaction, TransactionLogDTO.class);
         return modelMapper.map(createdTransaction, TransactionLogDTO.class);
     }
 

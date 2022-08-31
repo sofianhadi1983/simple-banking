@@ -9,6 +9,7 @@ import com.sofian.codingtest.services.ITransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class MemberController {
     ITransactionService transactionService;
 
     @PostMapping("/members")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<CreateMemberResponseDTO> createNewMember(@RequestBody CreateMemberResquestDTO request) {
         CreateMemberResponseDTO response = memberService.createNewMember(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
